@@ -2,6 +2,9 @@ const btn = document.querySelector(".btn");
 const inpEle = document.querySelector("input");
 const output = document.querySelector(".output");
 const baseurl = "https://reqres.in/api/";
+inpEle.style.display = "none";
+btn.textContent = "Main Menu";
+btn.classList.add("updateBtn");
 
 const app = { pg: 1 };
 // https://reqres.in/api/users?page=2
@@ -52,9 +55,7 @@ function makeNode(parent, nodeType, content) {
 function addUser(user) {
   const output1 = makeNode(output, "div", "");
   output1.classList.add("box");
-  output1.addEventListener("click", (e) => {
-    userPage(user.id);
-  });
+
   const html1 = `${user.first_name} ${user.last_name}`;
   const div1 = makeNode(output1, "div", html1);
   div1.userID = user.id;
@@ -69,7 +70,7 @@ function addUser(user) {
 }
 
 function userPage(id) {
-  //   console.log(id);
+  //console.log(id);
   const para = "users/" + id;
   const url = baseurl + para;
   fetch(url)
@@ -80,10 +81,10 @@ function userPage(id) {
 }
 
 function createPage(data) {
-  //   console.log(data);
+  //console.log(data);
   output.innerHTML = "";
   const main = addUser(data);
-  //   main.contentEditable = "true";
+  main.classList.add("updater");
   main.setAttribute("contenteditable", true);
   const updateBtn = makeNode(main, "button", "update");
   updateBtn.classList.add("updateBtn");
@@ -94,6 +95,32 @@ function createPage(data) {
       id: divEles[0].userID,
       email: divEles[1].textContent,
     };
-    console.log(userInfo);
+    updateUser(userInfo);
   });
+}
+
+function updateUser(userInfo) {
+  console.log(userInfo);
+
+  const para = "users/" + userInfo.id;
+  const url = baseurl + para;
+  console.log(url);
+  const headers = {
+    "Content-Type": "application/json",
+  };
+
+  const info = {
+    name: userInfo.name,
+    email: userInfo.email,
+  };
+
+  fetch(url, {
+    method: "PUT",
+    headers: headers,
+    body: JSON.stringify(info),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+    });
 }

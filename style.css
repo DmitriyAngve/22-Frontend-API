@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2em;
+}
+
+h1 {
+  display: block;
+  text-align: center;
+}
+
 .ind {
   padding: 10px;
   width: 50px;
@@ -23,9 +33,18 @@
   text-align: center;
 }
 
+.updater div {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: azure;
+}
+
 .updateBtn {
   display: block;
   width: 50%;
   margin: auto;
   text-align: center;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 1.5em;
 }
