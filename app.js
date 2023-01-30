@@ -23,20 +23,28 @@ function loadData() {
 function buildPage(data) {
   console.log(data);
   output.innerHTML = "";
+
   data.data.forEach((user) => {
     console.log(user);
+    const output1 = makeNode(output, "div", "");
+    output1.classList.add("box");
     const html1 = `${user.first_name} ${user.last_name} ${user.id}`;
-    const div1 = makeNode(output, "div", html1);
+    const div1 = makeNode(output1, "div", html1);
     const html2 = `${user.email}`;
-    const div2 = makeNode(output, "div", html2);
-    const img1 = makeNode(output, "img", "");
+    const div2 = makeNode(output1, "div", html2);
+    const img1 = makeNode(output1, "img", "");
     img1.setAttribute("src", user.avatar);
     console.log(img1);
   });
   const div3 = makeNode(output, "div", "");
+  div3.classList.add("box");
   for (let i = 0; i < data.total_pages; i++) {
     const span = makeNode(div3, "span", i + 1);
     span.classList.add("ind");
+    span.addEventListener("click", (e) => {
+      app.pg = i + 1;
+      loadData();
+    });
   }
 }
 
