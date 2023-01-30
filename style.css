@@ -11,6 +11,8 @@
   border-radius: 25px;
   text-align: center;
   cursor: pointer;
+  background-color: rgb(109, 99, 99);
+  color: wheat;
 }
 
 .box {
@@ -18,5 +20,12 @@
   border: 1px solid #ddd;
   margin: 10px auto;
   width: 80%;
+  text-align: center;
+}
+
+.updateBtn {
+  display: block;
+  width: 50%;
+  margin: auto;
   text-align: center;
 }
