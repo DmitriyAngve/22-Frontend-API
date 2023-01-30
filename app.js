@@ -22,7 +22,27 @@ function loadData() {
 
 function buildPage(data) {
   console.log(data);
+  output.innerHTML = "";
   data.data.forEach((user) => {
     console.log(user);
+    const html1 = `${user.first_name} ${user.last_name} ${user.id}`;
+    const div1 = makeNode(output, "div", html1);
+    const html2 = `${user.email}`;
+    const div2 = makeNode(output, "div", html2);
+    const img1 = makeNode(output, "img", "");
+    img1.setAttribute("src", user.avatar);
+    console.log(img1);
   });
+  const div3 = makeNode(output, "div", "");
+  for (let i = 0; i < data.total_pages; i++) {
+    const span = makeNode(div3, "span", i + 1);
+    span.classList.add("ind");
+  }
+}
+
+function makeNode(parent, nodeType, content) {
+  const el = document.createElement(nodeType);
+
+  el.innerHTML = content;
+  return parent.appendChild(el);
 }
